@@ -1,0 +1,13 @@
+{
+  "name": "haodinh/blitline",
+  "description": "Blitline v1.2.1",
+  "authors": [
+    {
+      "name": "haodinh",
+      "email": "haodv@pimmor.com"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "~6.0"
+  }
+}
