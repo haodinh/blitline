@@ -11,7 +11,7 @@
     "guzzlehttp/guzzle": "~6.0"
   },
   "autoload": {
-    "psr-0": {
+    "psr-4": {
       "Haodinh\\Blitline\\": "src/"
     }
   }

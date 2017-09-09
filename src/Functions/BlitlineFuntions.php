@@ -1,6 +1,6 @@
 <?php
 
-namespace Haodinh\Blitline\Functions;
+namespace Haodinh\Blitline\Funtions;
 
 use Haodinh\Blitline\Image\BlitlineImage;
 use Haodinh\Blitline\Utility\ConvertString;
@@ -29,7 +29,7 @@ class BlitlineFuntions
 
     /**
      * Constructor
-     * 
+     *
      * @param array $config
      */
     public function __construct(array $config)
@@ -39,7 +39,7 @@ class BlitlineFuntions
 
     /**
      * Invoke
-     * 
+     *
      * @return array
      */
     public function __invoke()
@@ -55,7 +55,7 @@ class BlitlineFuntions
 
     /**
      * Config
-     * 
+     *
      * @param array $config
      * @return BlitlineFuntions
      */
@@ -75,7 +75,7 @@ class BlitlineFuntions
 
     /**
      * Get name
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -85,7 +85,7 @@ class BlitlineFuntions
 
     /**
      * Set name
-     * 
+     *
      * @param string $name
      * @return BlitlineFuntions
      */
@@ -98,7 +98,7 @@ class BlitlineFuntions
 
     /**
      * Get image
-     * 
+     *
      * @return BlitlineImage
      */
     public function getImage()
@@ -112,7 +112,7 @@ class BlitlineFuntions
 
     /**
      * Set image
-     * 
+     *
      * @param BlitlineImage $image
      * @return BlitlineFuntions
      */
@@ -125,7 +125,7 @@ class BlitlineFuntions
 
     /**
      * Get params
-     * 
+     *
      * @return array
      */
     public function getParams()
@@ -135,7 +135,7 @@ class BlitlineFuntions
 
     /**
      * Set params
-     * 
+     *
      * @param array $params
      * @return BlitlineFuntions
      */
@@ -150,7 +150,7 @@ class BlitlineFuntions
 
     /**
      * Resize to fit
-     * 
+     *
      * @param int $with
      * @param int $height
      * @param bool $autosharpen
@@ -171,7 +171,7 @@ class BlitlineFuntions
 
     /**
      * Resize to fill
-     * 
+     *
      * @param int $with
      * @param int $height
      * @param bool $autosharpen

@@ -1,6 +1,6 @@
 <?php
 
-namespace Haodinh\Blitline\Options;
+namespace Haodinh\Blitline;
 
 use Haodinh\Blitline\Utility\ConvertString;
 

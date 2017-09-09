@@ -1,11 +1,11 @@
 <?php
 
-namespace Haodinh\Blitline\Service;
+namespace Haodinh\Blitline;
 
 use GuzzleHttp\Client as GuzzleClient;
-use Haodinh\Blitline\App\BlitlineApp;
-use Haodinh\Blitline\Job\BlitlineJob;
-use Haodinh\Blitline\Options\BlitlineOptions;
+use Haodinh\Blitline\BlitlineApp;
+use Haodinh\Blitline\BlitlineJob;
+use Haodinh\Blitline\BlitlineOptions;
 use Haodinh\Blitline\Http\BlitlineHttp;
 use Haodinh\Blitline\Http\BlitlineRequest;
 use Haodinh\Blitline\Http\BlitlineResponse;
@@ -15,15 +15,11 @@ use Haodinh\Blitline\Http\BlitlineResponse;
  */
 class BlitlineClient
 {
+
     /**
      * @var BlitlineApp
      */
     protected $app;
-
-    /**
-     * @var GuzzleClient
-     */
-    protected $http;
 
     /**
      * @var BlitlineJob
@@ -31,8 +27,18 @@ class BlitlineClient
     protected $job;
 
     /**
+     * @var BlitlineOptions
+     */
+    protected $options;
+
+    /**
+     * @var GuzzleClient
+     */
+    protected $http;
+
+    /**
      * Constructor
-     * 
+     *
      * @param array $config
      */
     public function __construct(array $config)
@@ -42,7 +48,7 @@ class BlitlineClient
 
     /**
      * Invoke
-     * 
+     *
      * @return array
      */
     public function __invoke()
@@ -56,7 +62,7 @@ class BlitlineClient
 
     /**
      * Config
-     * 
+     *
      * @param array $config
      * @return BlitlineOptions
      */
@@ -76,7 +82,7 @@ class BlitlineClient
 
     /**
      * Get app
-     * 
+     *
      * @return BlitlineApp
      */
     public function getApp()
@@ -90,7 +96,7 @@ class BlitlineClient
 
     /**
      * Get job
-     * 
+     *
      * @return BlitlineJob
      */
     public function getJob()
@@ -118,7 +124,7 @@ class BlitlineClient
 
     /**
      * Get http
-     * 
+     *
      * @return BlitlineHttp
      */
     public function getHttp()
@@ -132,7 +138,7 @@ class BlitlineClient
 
     /**
      * Process
-     * 
+     *
      * @return string|null
      */
     public function process()

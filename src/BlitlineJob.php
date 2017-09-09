@@ -1,6 +1,6 @@
 <?php
 
-namespace Haodinh\Blitline\Job;
+namespace Haodinh\Blitline;
 
 use Haodinh\Blitline\Image\BlitlineImage;
 use Haodinh\Blitline\Collection\FunctionsCollection;

@@ -2,7 +2,7 @@
 
 namespace Haodinh\Blitline\Collection;
 
-use Haodinh\Blitline\Functions\BlitlineFuntions;
+use Haodinh\Blitline\Funtions\BlitlineFuntions;
 
 /**
  * Functions collection
@@ -24,7 +24,7 @@ class FunctionsCollection extends ArrayCollection
 
     /**
      * Add many funtions
-     * 
+     *
      * @param array $functions
      * @return FunctionsCollection
      */
