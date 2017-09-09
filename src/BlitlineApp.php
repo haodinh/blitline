@@ -2,8 +2,6 @@
 
 namespace Haodinh\Blitline;
 
-use Haodinh\Blitline\Utility\ConvertString;
-
 /**
  * Blitline app
  */
@@ -21,17 +19,17 @@ class BlitlineApp
 
     /**
      * Constructor
-     * 
+     *
      * @param array $config
      */
-    public function __construct(array $config)
+    public function __construct(array $config = [])
     {
         $this->config($config);
     }
 
     /**
      * Invoke
-     * 
+     *
      * @return array
      */
     public function __invoke()
@@ -44,7 +42,7 @@ class BlitlineApp
 
     /**
      * Config
-     * 
+     *
      * @param array $config
      * @return BlitlineApp
      */
@@ -52,7 +50,7 @@ class BlitlineApp
     {
         foreach ($config as $key => $value) {
 
-            $method = 'set' . ucfirst(ConvertString::toCamelCase($key));
+            $method = 'set' . ucfirst($key);
 
             if (is_callable([$this, $method])) {
                 $this->$method($value);
@@ -64,7 +62,7 @@ class BlitlineApp
 
     /**
      * Set version
-     * 
+     *
      * @param string $version
      * @return BlitlineApp
      */
@@ -77,7 +75,7 @@ class BlitlineApp
 
     /**
      * Get version
-     * 
+     *
      * @return string
      */
     public function getVersion()
@@ -87,7 +85,7 @@ class BlitlineApp
 
     /**
      * Set application id
-     * 
+     *
      * @param string $applicationId
      * @return BlitlineApp
      */
@@ -100,7 +98,7 @@ class BlitlineApp
 
     /**
      * Get application id
-     * 
+     *
      * @return string
      */
     public function getApplicationId()

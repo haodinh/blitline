@@ -1,16 +1,16 @@
 <?php
 
-namespace Haodinh\Blitline\Funtions;
+namespace Haodinh\Blitline\Functions;
 
 use Haodinh\Blitline\Image\BlitlineImage;
 use Haodinh\Blitline\Utility\ConvertString;
 
 /**
- * Blitline funtions
+ * Blitline functions
  *
  * @author haodinh
  */
-class BlitlineFuntions
+class BlitlineFunctions
 {
     /**
      * @var string
@@ -28,11 +28,16 @@ class BlitlineFuntions
     protected $params;
 
     /**
+     * @var BlitlineFunctions
+     */
+    protected $child;
+
+    /**
      * Constructor
      *
      * @param array $config
      */
-    public function __construct(array $config)
+    public function __construct(array $config = [])
     {
         $this->config($config);
     }
@@ -44,20 +49,25 @@ class BlitlineFuntions
      */
     public function __invoke()
     {
-        return [
+        $result = [
             'name'   => $this->getName(),
-            'params' => $this->getParams(),
-            'save'   => [
-                'image_identifier' => $this->getImage()->getImageIdentifier()
-            ]
+            'params' => $this->getParams()
         ];
+
+        if ($imageIdentifier = $this->getImage()->getImageIdentifier()) {
+            $result['save']['image_identifier'] = $this->getImage()->getImageIdentifier();
+        }
+
+        if ($child = $this->getChild()) {
+            $result['functions'] = $child();
+        }
     }
 
     /**
      * Config
      *
      * @param array $config
-     * @return BlitlineFuntions
+     * @return BlitlineFunctions
      */
     public function config(array $config)
     {
@@ -87,7 +97,7 @@ class BlitlineFuntions
      * Set name
      *
      * @param string $name
-     * @return BlitlineFuntions
+     * @return BlitlineFunctions
      */
     public function setName(string $name)
     {
@@ -114,7 +124,7 @@ class BlitlineFuntions
      * Set image
      *
      * @param BlitlineImage $image
-     * @return BlitlineFuntions
+     * @return BlitlineFunctions
      */
     public function setImage(BlitlineImage $image)
     {
@@ -137,13 +147,36 @@ class BlitlineFuntions
      * Set params
      *
      * @param array $params
-     * @return BlitlineFuntions
+     * @return BlitlineFunctions
      */
     public function setParams(array $params)
     {
         $method = ConvertString::toCamelCase($this->getName());
 
         $this->params = method_exists($this, $method) ? $this->$method(...$params) : $params;
+
+        return $this;
+    }
+
+    /**
+     * Get child
+     *
+     * @return BlitlineFunctions
+     */
+    public function getChild()
+    {
+        return $this->child;
+    }
+
+    /**
+     * Set child
+     *
+     * @param BlitlineFunctions|array $child
+     * @return BlitlineFunctions
+     */
+    public function setChild($child)
+    {
+        $this->child = $child instanceof BlitlineFunctions ? $child : new BlitlineFunctions($child);
 
         return $this;
     }
@@ -187,6 +220,19 @@ class BlitlineFuntions
             'autosharpen'        => $autosharpen,
             'only_shrink_larger' => $onlyShrinkLarger,
             'gravity'            => $gravity
+        ];
+    }
+
+    /**
+     * Density
+     *
+     * @param int $dpi
+     * @return array
+     */
+    protected function density(int $dpi)
+    {
+        return [
+            'dpi' => $dpi
         ];
     }
 }

@@ -41,7 +41,7 @@ class BlitlineClient
      *
      * @param array $config
      */
-    public function __construct(array $config)
+    public function __construct(array $config = [])
     {
         $this->config($config);
     }
@@ -101,8 +101,8 @@ class BlitlineClient
      */
     public function getJob()
     {
-        if (!$this->job instanceof BlitlineOptions) {
-            $this->job = new BlitlineOptions;
+        if (!$this->job instanceof BlitlineJob) {
+            $this->job = new BlitlineJob;
         }
 
         return $this->job;

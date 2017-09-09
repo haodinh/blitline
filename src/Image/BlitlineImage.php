@@ -27,17 +27,33 @@ class BlitlineImage
 
     /**
      * Constructor
-     * 
+     *
      * @param array $config
      */
-    public function __construct(array $config)
+    public function __construct(array $config = [])
     {
         $this->config($config);
     }
 
     /**
+     * Invoke
+     *
+     * @return array
+     */
+    public function __invoke()
+    {
+        $meta = $this->getMeta();
+
+        return [
+            'image_identifier' => $this->getImageIdentifier(),
+            'src'              => $this->getSrc(),
+            'meta'             => $meta()
+        ];
+    }
+
+    /**
      * Config
-     * 
+     *
      * @param array $config
      * @return BlitlineImage
      */
@@ -125,6 +141,10 @@ class BlitlineImage
      */
     public function getMeta()
     {
+        if (!$this->meta instanceof MetaImage) {
+            $this->meta = new MetaImage;
+        }
+
         return $this->meta;
     }
 }

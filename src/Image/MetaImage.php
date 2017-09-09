@@ -20,6 +20,49 @@ class MetaImage
     protected $height;
 
     /**
+     * Constructor
+     *
+     * @param array $config
+     */
+    public function __construct(array $config = [])
+    {
+        $this->config($config);
+    }
+
+    /**
+     * Invoke
+     *
+     * @return array
+     */
+    public function __invoke()
+    {
+        return [
+            'width'  => $this->getWidth(),
+            'height' => $this->getHeight()
+        ];
+    }
+
+    /**
+     * Config
+     *
+     * @param array $config
+     * @return BlitlineImage
+     */
+    public function config(array $config)
+    {
+        foreach ($config as $key => $value) {
+
+            $method = 'set' . ucfirst($key);
+
+            if (is_callable([$this, $method])) {
+                $this->$method($value);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * Set width
      *
      * @param int

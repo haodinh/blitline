@@ -29,15 +29,17 @@ class BlitlineJob
 
     /**
      * Constructor
+     *
+     * @param array $config
      */
-    public function __construct()
+    public function __construct(array $config = [])
     {
-        $this->functions = new FunctionsCollection;
+        $this->config($config);
     }
 
     /**
      * Invoke
-     * 
+     *
      * @return array
      */
     public function __invoke()
@@ -49,6 +51,26 @@ class BlitlineJob
         }
 
         return $result;
+    }
+
+    /**
+     * Config
+     *
+     * @param array $config
+     * @return BlitlineJob
+     */
+    public function config(array $config)
+    {
+        foreach ($config as $key => $value) {
+
+            $method = 'set' . ucfirst($key);
+
+            if (is_callable([$this, $method])) {
+                $this->$method($value);
+            }
+        }
+
+        return $this;
     }
 
     /**
@@ -76,7 +98,7 @@ class BlitlineJob
 
     /**
      * Set origin image
-     * 
+     *
      * @param BlitlineImage $image
      * @return BlitlineJob
      */
@@ -89,7 +111,7 @@ class BlitlineJob
 
     /**
      * Get origin image
-     * 
+     *
      * @return BlitlineImage
      */
     public function getOriginImage()

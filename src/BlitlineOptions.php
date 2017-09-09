@@ -21,17 +21,17 @@ class BlitlineOptions
 
     /**
      * Constructor
-     * 
+     *
      * @param array $config
      */
-    public function __construct(array $config)
+    public function __construct(array $config = [])
     {
         $this->config($config);
     }
 
     /**
      * Invoke
-     * 
+     *
      * @return array
      */
     public function __invoke()
@@ -43,8 +43,8 @@ class BlitlineOptions
 
             $field = preg_replace('/^get/', '', $method);
 
-            if ($field !== $method && $result = $this->$method()) {
-                $result[ConvertString::toUnderscore($field)] = $result;
+            if ($field !== $method && $value = $this->$method()) {
+                $result[ConvertString::toUnderscore($field)] = $value;
             }
         }
 
@@ -53,7 +53,7 @@ class BlitlineOptions
 
     /**
      * Config
-     * 
+     *
      * @param array $config
      * @return BlitlineOptions
      */
@@ -73,7 +73,7 @@ class BlitlineOptions
 
     /**
      * Set postback url
-     * 
+     *
      * @param string $postbackUrl
      * @return BlitlineOptions
      */
@@ -86,7 +86,7 @@ class BlitlineOptions
 
     /**
      * Get postback url
-     * 
+     *
      * @return string
      */
     public function getPostbackUrl()
@@ -96,7 +96,7 @@ class BlitlineOptions
 
     /**
      * Set postback headers
-     * 
+     *
      * @param array $postbackHeaders
      * @return BlitlineOptions
      */
@@ -109,7 +109,7 @@ class BlitlineOptions
 
     /**
      * Get postback headers
-     * 
+     *
      * @return array
      */
     public function getPostbackHeaders()

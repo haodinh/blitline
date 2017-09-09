@@ -2,7 +2,7 @@
 
 namespace Haodinh\Blitline\Collection;
 
-use Haodinh\Blitline\Funtions\BlitlineFuntions;
+use Haodinh\Blitline\Functions\BlitlineFunctions;
 
 /**
  * Functions collection
@@ -17,13 +17,13 @@ class FunctionsCollection extends ArrayCollection
      */
     public function add($function)
     {
-        if ($function instanceof BlitlineFuntions) {
+        if ($function instanceof BlitlineFunctions) {
             parent::add($function);
         }
     }
 
     /**
-     * Add many funtions
+     * Add many functions
      *
      * @param array $functions
      * @return FunctionsCollection
@@ -32,7 +32,7 @@ class FunctionsCollection extends ArrayCollection
     {
         foreach ($functions as $function) {
 
-            $object = is_array($function) ? new BlitlineFuntions($function) : $function;
+            $object = is_array($function) ? new BlitlineFunctions($function) : $function;
 
             $this->add($object);
         }
