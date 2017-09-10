@@ -15,20 +15,19 @@ class FunctionsCollection extends ArrayCollection
     /**
      * {@inheritdoc}
      */
-    public function add($function)
+    public function __construct(array $items = [])
     {
-        if ($function instanceof BlitlineFunctions) {
-            parent::add($function);
-        }
+        parent::__construct([]);
+        $this->addFunctions($items);
     }
 
     /**
-     * Add many functions
+     * Add functions
      *
      * @param array $functions
      * @return FunctionsCollection
      */
-    public function addMany(array $functions)
+    public function addFunctions(array $functions)
     {
         foreach ($functions as $function) {
 
@@ -36,7 +35,7 @@ class FunctionsCollection extends ArrayCollection
 
             $this->add($object);
         }
-		
-		return FunctionsCollection;
+
+        return $this;
     }
 }

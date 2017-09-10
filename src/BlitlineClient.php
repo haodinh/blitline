@@ -15,7 +15,6 @@ use Haodinh\Blitline\Http\BlitlineResponse;
  */
 class BlitlineClient
 {
-
     /**
      * @var BlitlineApp
      */
@@ -139,15 +138,15 @@ class BlitlineClient
     /**
      * Process
      *
-	 * @param  BlitlineRequest $request
+     * @param  BlitlineRequest $request
      * @param  BlitlineResponse $response
      * @return bool
      */
     public function process(BlitlineRequest &$request = null, BlitlineResponse &$response = null)
     {
-		if (!$request) {
-			$request = new BlitlineRequest(['json' => $this()]);
-		}
+        if (!$request) {
+            $request = new BlitlineRequest(['json' => $this()]);
+        }
 
         $this->getHttp()->request($request, $response);
 
@@ -160,15 +159,15 @@ class BlitlineClient
         $job = $this->getJob();
 
         $job->setJobId($results['job_id']);
-		
-		$funcs = $job->getFunctions();
-		
-		foreach ($images as $index => $image) {
-			if ($func = $funcs->get($index)) {
-				$func->getImage()->setSrc($images[$index]['s3_url']);
-			}
+
+        $funcs = $job->getFunctions();
+
+        foreach ($images as $index => $image) {
+            if ($func = $funcs->get($index)) {
+                $func->getImage()->setSrc($images[$index]['s3_url']);
+            }
         }
-		
-		return true;
+
+        return true;
     }
 }

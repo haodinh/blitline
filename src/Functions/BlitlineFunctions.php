@@ -3,6 +3,7 @@
 namespace Haodinh\Blitline\Functions;
 
 use Haodinh\Blitline\Image\BlitlineImage;
+use Haodinh\Blitline\Collection\FunctionsCollection;
 use Haodinh\Blitline\Utility\ConvertString;
 
 /**
@@ -58,11 +59,11 @@ class BlitlineFunctions
             $result['save']['image_identifier'] = $imageIdentifier;
         }
 
-        if ($child = $this->getChild()) {
-            $result['functions'] = $child();
+        foreach ($this->getChild() as $child) {
+            $result['functions'][] = $child();
         }
 
-		return $result;
+        return $result;
     }
 
     /**
@@ -163,22 +164,26 @@ class BlitlineFunctions
     /**
      * Get child
      *
-     * @return BlitlineFunctions
+     * @return FunctionsCollection
      */
     public function getChild()
     {
+        if (!$this->child instanceof FunctionsCollection) {
+            $this->child = new FunctionsCollection;
+        }
+
         return $this->child;
     }
 
     /**
      * Set child
      *
-     * @param BlitlineFunctions|array $child
+     * @param FunctionsCollection|array $child
      * @return BlitlineFunctions
      */
     public function setChild($child)
     {
-        $this->child = $child instanceof BlitlineFunctions ? $child : new BlitlineFunctions($child);
+        $this->child = $child instanceof FunctionsCollection ? $child : new FunctionsCollection($child);
 
         return $this;
     }

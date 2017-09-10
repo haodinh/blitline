@@ -126,9 +126,10 @@ class BlitlineJob
     /**
      * Set functions
      *
-     * @return FunctionsCollection
+     * @param FunctionsCollection|array $functions
+     * @return FunctionsJob
      */
-    public function setFunctions(FunctionsCollection $functions)
+    public function setFunctions($functions)
     {
         $this->functions = $functions instanceof FunctionsCollection ? $functions : new FunctionsCollection($functions);
 
