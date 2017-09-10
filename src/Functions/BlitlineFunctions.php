@@ -55,12 +55,14 @@ class BlitlineFunctions
         ];
 
         if ($imageIdentifier = $this->getImage()->getImageIdentifier()) {
-            $result['save']['image_identifier'] = $this->getImage()->getImageIdentifier();
+            $result['save']['image_identifier'] = $imageIdentifier;
         }
 
         if ($child = $this->getChild()) {
             $result['functions'] = $child();
         }
+
+		return $result;
     }
 
     /**
@@ -123,12 +125,12 @@ class BlitlineFunctions
     /**
      * Set image
      *
-     * @param BlitlineImage $image
+     * @param BlitlineImage|array $image
      * @return BlitlineFunctions
      */
-    public function setImage(BlitlineImage $image)
+    public function setImage($image)
     {
-        $this->image = $image;
+        $this->image = $image instanceof BlitlineImage ? $image : new BlitlineImage($image);
 
         return $this;
     }

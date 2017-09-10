@@ -32,9 +32,11 @@ class FunctionsCollection extends ArrayCollection
     {
         foreach ($functions as $function) {
 
-            $object = is_array($function) ? new BlitlineFunctions($function) : $function;
+            $object = $function instanceof BlitlineFunctions ? $function : new BlitlineFunctions($function);
 
             $this->add($object);
         }
+		
+		return FunctionsCollection;
     }
 }

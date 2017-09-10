@@ -21,7 +21,7 @@ class BlitlineHttp
      *
      * @param  BlitlineRequest $request
      * @param  BlitlineResponse $response
-     * @return BlitlineResponse
+     * @return void
      */
     public function request(BlitlineRequest $request, BlitlineResponse &$response = null)
     {

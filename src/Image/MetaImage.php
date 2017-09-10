@@ -65,7 +65,7 @@ class MetaImage
     /**
      * Set width
      *
-     * @param int
+     * @param int $width
      * @return MetaImage
      */
     public function setWidth(int $width)
@@ -86,7 +86,7 @@ class MetaImage
     }
 
     /**
-     * Set height
+     * Set height $height
      *
      * @param int
      * @return MetaImage

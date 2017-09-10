@@ -139,32 +139,36 @@ class BlitlineClient
     /**
      * Process
      *
-     * @return string|null
+	 * @param  BlitlineRequest $request
+     * @param  BlitlineResponse $response
+     * @return bool
      */
-    public function process()
+    public function process(BlitlineRequest &$request = null, BlitlineResponse &$response = null)
     {
-        $json = $this();
-
-        $request  = new BlitlineRequest(['json' => $json]);
-        $response = new BlitlineResponse;
+		if (!$request) {
+			$request = new BlitlineRequest(['json' => $this()]);
+		}
 
         $this->getHttp()->request($request, $response);
 
-        $results = $response->getBody()['results'];
+        $results = $response->getBody()['results'] ?? null;
 
-        if (!$images = $results['images'] ?? null) {
-            return $results['error'];
+        if (!$results || !$images = $results['images'] ?? null) {
+            return false;
         }
 
         $job = $this->getJob();
 
         $job->setJobId($results['job_id']);
-
-        foreach ($job->getFunctions() as $index => $func) {
-
-            $src = $images[$index]['s3_url'];
-
-            $func->getImage()->setSrc($src);
+		
+		$funcs = $job->getFunctions();
+		
+		foreach ($images as $index => $image) {
+			if ($func = $funcs->get($index)) {
+				$func->getImage()->setSrc($images[$index]['s3_url']);
+			}
         }
+		
+		return true;
     }
 }

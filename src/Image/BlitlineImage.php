@@ -74,7 +74,7 @@ class BlitlineImage
     /**
      * Set image identifier
      *
-     * @param string
+     * @param string $imageIdentifier
      * @return BlitlineImage
      */
     public function setImageIdentifier(string $imageIdentifier)
@@ -91,17 +91,13 @@ class BlitlineImage
      */
     public function getImageIdentifier()
     {
-        if (!$this->imageIdentifier) {
-            $this->imageIdentifier = uniqid();
-        }
-
         return $this->imageIdentifier;
     }
 
     /**
      * Set src
      *
-     * @param string
+     * @param string $ssrc
      * @return BlitlineImage
      */
     public function setSrc(string $src)
@@ -124,12 +120,12 @@ class BlitlineImage
     /**
      * Set meta
      *
-     * @param MetaImage
+     * @param MetaImage|array $meta
      * @return BlitlineImage
      */
-    public function setMeta(MetaImage $meta)
+    public function setMeta($meta)
     {
-        $this->meta = $meta;
+        $this->meta = $meta instanceof MetaImage ? $meta : new MetaImage($meta);
 
         return $this;
     }

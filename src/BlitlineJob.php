@@ -23,7 +23,7 @@ class BlitlineJob
     protected $originImage;
 
     /**
-     * @var string
+     * @var FunctionsCollection
      */
     protected $functions;
 
@@ -104,7 +104,7 @@ class BlitlineJob
      */
     public function setOriginImage(BlitlineImage $image)
     {
-        $this->originImage = $image;
+        $this->originImage = $image instanceof BlitlineImage ? $image : new BlitlineImage($image);
 
         return $this;
     }
@@ -130,7 +130,7 @@ class BlitlineJob
      */
     public function setFunctions(FunctionsCollection $functions)
     {
-        $this->functions = $functions;
+        $this->functions = $functions instanceof FunctionsCollection ? $functions : new FunctionsCollection($functions);
 
         return $this;
     }

@@ -71,6 +71,7 @@ class ArrayCollection implements Iterator, Countable
      * Create item
      * 
      * @param array $items
+	 * @return ArrayCollection
      */
     public function create(array $items)
     {
@@ -83,6 +84,7 @@ class ArrayCollection implements Iterator, Countable
      * Add item
      * 
      * @param mixed $item
+	 * @return ArrayCollection
      */
     public function add($item)
     {
@@ -95,7 +97,7 @@ class ArrayCollection implements Iterator, Countable
      * Remove item
      * 
      * @param mixed $key
-     * @return mixed
+     * @return ArrayCollection
      */
     public function remove($key)
     {
@@ -103,11 +105,22 @@ class ArrayCollection implements Iterator, Countable
 
         return $this;
     }
+	
+	/**
+     * Get item
+     * 
+     * @param mixed $key
+     * @return mixed
+     */
+	public function get($key)
+    {
+        return $this->items[$key] ?? null;
+    }
 
     /**
      * Check is empty
      * 
-     * @return ArrayCollection
+     * @return bool
      */
     public function isEmpty()
     {
