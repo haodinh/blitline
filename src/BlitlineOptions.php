@@ -20,6 +20,21 @@ class BlitlineOptions
     protected $postbackHeaders;
 
     /**
+     * @var bool
+     */
+    protected $extendedMetadata;
+
+    /**
+     * @var bool
+     */
+    protected $getExif;
+
+    /**
+     * @var int
+     */
+    protected $waitRetryDelay;
+
+    /**
      * Constructor
      *
      * @param array $config
@@ -115,5 +130,74 @@ class BlitlineOptions
     public function getPostbackHeaders()
     {
         return $this->postbackHeaders;
+    }
+
+    /**
+     * Set extended metadata
+     *
+     * @param bool $extendedMetadata
+     * @return BlitlineOptions
+     */
+    public function setExtendedMetadata(bool $extendedMetadata)
+    {
+        $this->extendedMetadata = $extendedMetadata;
+
+        return $this;
+    }
+
+    /**
+     * Get extended metadata
+     *
+     * @return bool
+     */
+    public function getExtendedMetadata()
+    {
+        return $this->extendedMetadata;
+    }
+
+    /**
+     * Set get exif
+     *
+     * @param bool $getExif
+     * @return BlitlineOptions
+     */
+    public function setGetExif(bool $getExif)
+    {
+        $this->getExif = $getExif;
+
+        return $this;
+    }
+
+    /**
+     * Get get exif
+     *
+     * @return bool
+     */
+    public function getGetExif()
+    {
+        return $this->getExif;
+    }
+
+    /**
+     * Set wait retry delay
+     *
+     * @param int $waitRetryDelay
+     * @return BlitlineOptions
+     */
+    public function setWaitRetryDelay(int $waitRetryDelay)
+    {
+        $this->waitRetryDelay = $waitRetryDelay;
+
+        return $this;
+    }
+
+    /**
+     * Get wait retry delay
+     *
+     * @return int
+     */
+    public function getWaitRetryDelay()
+    {
+        return $this->waitRetryDelay;
     }
 }

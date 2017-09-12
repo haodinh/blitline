@@ -20,6 +20,16 @@ class MetaImage
     protected $height;
 
     /**
+     * @var int
+     */
+    protected $filesize;
+
+    /**
+     * @var string
+     */
+    protected $mimeType;
+
+    /**
      * Constructor
      *
      * @param array $config
@@ -37,8 +47,10 @@ class MetaImage
     public function __invoke()
     {
         return [
-            'width'  => $this->getWidth(),
-            'height' => $this->getHeight()
+            'width'     => $this->getWidth(),
+            'height'    => $this->getHeight(),
+            'filesize'  => $this->getFilesize(),
+            'mime_type' => $this->getMimeType()
         ];
     }
 
@@ -86,9 +98,9 @@ class MetaImage
     }
 
     /**
-     * Set height $height
+     * Set height
      *
-     * @param int
+     * @param int $height
      * @return MetaImage
      */
     public function setHeight(int $height)
@@ -106,5 +118,51 @@ class MetaImage
     public function getHeight()
     {
         return $this->height;
+    }
+
+    /**
+     * Set filesize
+     *
+     * @param int $filesize
+     * @return MetaImage
+     */
+    public function setFilesize(int $filesize)
+    {
+        $this->filesize = $filesize;
+
+        return $this;
+    }
+
+    /**
+     * Get filesize
+     *
+     * @return int
+     */
+    public function getFilesize()
+    {
+        return $this->filesize;
+    }
+
+    /**
+     * Set mime type
+     *
+     * @param string $mimeType
+     * @return MetaImage
+     */
+    public function setMimeType(string $mimeType)
+    {
+        $this->mimeType = $mimeType;
+
+        return $this;
+    }
+
+    /**
+     * Get mime type
+     *
+     * @return string
+     */
+    public function getMimeType()
+    {
+        return $this->mimeType;
     }
 }
