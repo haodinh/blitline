@@ -55,8 +55,13 @@ class BlitlineFunctions
             'params' => $this->getParams()
         ];
 
-        if ($imageIdentifier = $this->getImage()->getImageIdentifier()) {
-            $result['save']['image_identifier'] = $imageIdentifier;
+        $image = $this->getImage();
+
+        if ($imageIdentifier = $image->getImageIdentifier()) {
+            $result['save'] = [
+                'image_identifier' => $imageIdentifier,
+                'quality'          => $image->getQuality()
+            ];
         }
 
         foreach ($this->getChild() as $child) {
