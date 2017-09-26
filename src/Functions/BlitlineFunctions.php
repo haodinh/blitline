@@ -189,6 +189,29 @@ class BlitlineFunctions
     }
 
     /**
+     * Crop
+     *
+     * @param int $with
+     * @param int $height
+     * @param int $x
+     * @param int $y
+     * @param bool $preserveAspectIfSmaller
+     * @param bool $gravity
+     * @return array
+     */
+    protected function crop(int $with, int $height, int $x = 0, int $y = 0, bool $preserveAspectIfSmaller = false, bool $gravity = false)
+    {
+        return [
+            'with'                       => $with,
+            'height'                     => $height,
+            'x'                          => $x,
+            'y'                          => $y,
+            'preserve_aspect_if_smaller' => $preserveAspectIfSmaller,
+            'gravity'                    => $gravity
+        ];
+    }
+
+    /**
      * Resize to fit
      *
      * @param int $with
@@ -228,6 +251,28 @@ class BlitlineFunctions
             'only_shrink_larger' => $onlyShrinkLarger,
             'gravity'            => $gravity
         ];
+    }
+
+    /**
+     * Scale
+     *
+     * @param float $scaleFactor
+     * @param int $with
+     * @param int $height
+     * @return array
+     */
+    protected function scale(float $scaleFactor, int $with = 0, int $height = 0)
+    {
+        if ($scaleFactor) {
+            return [
+                'scale_factor' => $scaleFactor
+            ];
+        } else {
+            return [
+                'with'   => $with,
+                'height' => $height
+            ];
+        }
     }
 
     /**
