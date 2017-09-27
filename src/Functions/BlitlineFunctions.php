@@ -196,7 +196,7 @@ class BlitlineFunctions
     /**
      * Crop
      *
-     * @param int $with
+     * @param int $width
      * @param int $height
      * @param int $x
      * @param int $y
@@ -204,10 +204,10 @@ class BlitlineFunctions
      * @param bool $gravity
      * @return array
      */
-    protected function crop(int $with, int $height, int $x = 0, int $y = 0, bool $preserveAspectIfSmaller = false, bool $gravity = false)
+    protected function crop(int $width, int $height, int $x = 0, int $y = 0, bool $preserveAspectIfSmaller = false, bool $gravity = false)
     {
         return [
-            'with'                       => $with,
+            'width'                       => $width,
             'height'                     => $height,
             'x'                          => $x,
             'y'                          => $y,
@@ -219,17 +219,17 @@ class BlitlineFunctions
     /**
      * Resize to fit
      *
-     * @param int $with
+     * @param int $width
      * @param int $height
      * @param bool $autosharpen
      * @param bool $onlyShrinkLarger
      * @param bool $gravity
      * @return array
      */
-    protected function resizeToFit(int $with, int $height, bool $autosharpen = false, bool $onlyShrinkLarger = false, bool $gravity = false)
+    protected function resizeToFit(int $width, int $height, bool $autosharpen = false, bool $onlyShrinkLarger = false, bool $gravity = false)
     {
         return [
-            'with'               => $with,
+            'width'               => $width,
             'height'             => $height,
             'autosharpen'        => $autosharpen,
             'only_shrink_larger' => $onlyShrinkLarger,
@@ -240,17 +240,17 @@ class BlitlineFunctions
     /**
      * Resize to fill
      *
-     * @param int $with
+     * @param int $width
      * @param int $height
      * @param bool $autosharpen
      * @param bool $onlyShrinkLarger
      * @param bool $gravity
      * @return array
      */
-    protected function resizeToFill(int $with, int $height, bool $autosharpen = false, bool $onlyShrinkLarger = false, bool $gravity = false)
+    protected function resizeToFill(int $width, int $height, bool $autosharpen = false, bool $onlyShrinkLarger = false, bool $gravity = false)
     {
         return [
-            'with'               => $with,
+            'width'               => $width,
             'height'             => $height,
             'autosharpen'        => $autosharpen,
             'only_shrink_larger' => $onlyShrinkLarger,
@@ -262,11 +262,11 @@ class BlitlineFunctions
      * Scale
      *
      * @param float $scaleFactor
-     * @param int $with
+     * @param int $width
      * @param int $height
      * @return array
      */
-    protected function scale(float $scaleFactor, int $with = 0, int $height = 0)
+    protected function scale(float $scaleFactor, int $width = 0, int $height = 0)
     {
         if ($scaleFactor) {
             return [
@@ -274,7 +274,7 @@ class BlitlineFunctions
             ];
         } else {
             return [
-                'with'   => $with,
+                'width'   => $width,
                 'height' => $height
             ];
         }
