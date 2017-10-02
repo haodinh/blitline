@@ -159,9 +159,7 @@ class BlitlineFunctions
      */
     public function setParams(array $params)
     {
-        $method = ConvertString::toCamelCase($this->getName());
-
-        $this->params = method_exists($this, $method) ? $this->$method(...$params) : $params;
+        $this->params = $params;
 
         return $this;
     }
@@ -191,105 +189,5 @@ class BlitlineFunctions
         $this->child = $child instanceof FunctionsCollection ? $child : new FunctionsCollection($child);
 
         return $this;
-    }
-
-    /**
-     * Crop
-     *
-     * @param int $width
-     * @param int $height
-     * @param int $x
-     * @param int $y
-     * @param bool $preserveAspectIfSmaller
-     * @param bool $gravity
-     * @return array
-     */
-    protected function crop(int $width, int $height, int $x = 0, int $y = 0, bool $preserveAspectIfSmaller = false, bool $gravity = false)
-    {
-        return [
-            'width'                       => $width,
-            'height'                     => $height,
-            'x'                          => $x,
-            'y'                          => $y,
-            'preserve_aspect_if_smaller' => $preserveAspectIfSmaller,
-            'gravity'                    => $gravity
-        ];
-    }
-
-    /**
-     * Resize to fit
-     *
-     * @param int $width
-     * @param int $height
-     * @param bool $autosharpen
-     * @param bool $onlyShrinkLarger
-     * @param bool $gravity
-     * @return array
-     */
-    protected function resizeToFit(int $width, int $height, bool $autosharpen = false, bool $onlyShrinkLarger = false, bool $gravity = false)
-    {
-        return [
-            'width'               => $width,
-            'height'             => $height,
-            'autosharpen'        => $autosharpen,
-            'only_shrink_larger' => $onlyShrinkLarger,
-            'gravity'            => $gravity
-        ];
-    }
-
-    /**
-     * Resize to fill
-     *
-     * @param int $width
-     * @param int $height
-     * @param bool $autosharpen
-     * @param bool $onlyShrinkLarger
-     * @param bool $gravity
-     * @return array
-     */
-    protected function resizeToFill(int $width, int $height, bool $autosharpen = false, bool $onlyShrinkLarger = false, bool $gravity = false)
-    {
-        return [
-            'width'               => $width,
-            'height'             => $height,
-            'autosharpen'        => $autosharpen,
-            'only_shrink_larger' => $onlyShrinkLarger,
-            'gravity'            => $gravity
-        ];
-    }
-
-    /**
-     * Scale
-     *
-     * @param float $scaleFactor
-     * @param int $width
-     * @param int $height
-     * @return array
-     */
-    protected function scale(float $scaleFactor, int $width = 0, int $height = 0)
-    {
-        if ($scaleFactor) {
-            return [
-                'scale_factor' => $scaleFactor
-            ];
-        } else {
-            return [
-                'width'   => $width,
-                'height' => $height
-            ];
-        }
-    }
-
-    /**
-     * Density
-     *
-     * @param int $dpi
-     * @return array
-     */
-    protected function density(int $dpi)
-    {
-        return [
-            'dpi' => $dpi
-        ];
     }
 }

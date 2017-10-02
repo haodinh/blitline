@@ -9,6 +9,7 @@ use Haodinh\Blitline\BlitlineOptions;
 use Haodinh\Blitline\Http\BlitlineHttp;
 use Haodinh\Blitline\Http\BlitlineRequest;
 use Haodinh\Blitline\Http\BlitlineResponse;
+use Haodinh\Blitline\Exception\BlitlineException;
 
 /**
  * Blitline client
@@ -169,5 +170,54 @@ class BlitlineClient
         }
 
         return true;
+    }
+
+    /**
+     * Poll
+     *
+     * @param  BlitlineRequest $request
+     * @param  BlitlineResponse $response
+     * @return bool
+     */
+    public function poll(BlitlineRequest &$request = null, BlitlineResponse &$response = null)
+    {
+        $job = $this->getJob();
+
+        if (!$request) {
+
+            if ($jobId = $job->getJobId()) {
+                throw new BlitlineException('EMPTY_JOB_ID', 400);
+            }
+
+            $request = new BlitlineRequest([
+                'method'   => 'GET',
+                'endpoint' => "http://cache.blitline.com/listen/$jobId"
+            ]);
+        }
+
+        $this->getHttp()->request($request, $response);
+
+        $results = $response->getBody()['results'] ?? null;
+
+        if (!$results || !$images = $results['images'] ?? null) {
+            throw new BlitlineException('PROCESS_FAILD', 500);
+        }
+
+        $imageList = [];
+
+        foreach ($images as $image) {
+            $imageList[] = [
+                'image' => [
+                    'imageIdentifier' => $image['image_identifier'],
+                    'src'             => $image['s3_url'],
+                    'meta'            => $image['meta'],
+                ]
+            ];
+        }
+
+        $job->setFunctions($imageList);
+        $job->setOriginImage([
+            'meta' => $results['original_meta']
+        ]);
     }
 }

@@ -99,10 +99,10 @@ class BlitlineJob
     /**
      * Set origin image
      *
-     * @param BlitlineImage $image
+     * @param BlitlineImage|array $image
      * @return BlitlineJob
      */
-    public function setOriginImage(BlitlineImage $image)
+    public function setOriginImage($image)
     {
         $this->originImage = $image instanceof BlitlineImage ? $image : new BlitlineImage($image);
 
