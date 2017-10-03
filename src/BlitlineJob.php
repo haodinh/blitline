@@ -44,7 +44,13 @@ class BlitlineJob
      */
     public function __invoke()
     {
-        $result['src'] = $this->getOriginImage()->getSrc();
+        $originImage = $this->getOriginImage();
+
+        $result['src'] = $originImage->getSrc();
+
+        if ($srcType = $originImage->getSrcType()) {
+            $result['src_type'] = $srcType;
+        }
 
         foreach ($this->getFunctions() as $func) {
             $result['functions'][] = $func();

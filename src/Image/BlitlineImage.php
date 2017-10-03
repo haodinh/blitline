@@ -20,6 +20,11 @@ class BlitlineImage
     protected $src;
 
     /**
+     * @var string
+     */
+    protected $srcType;
+
+    /**
      * @var int
      */
     protected $quality = 100;
@@ -49,12 +54,18 @@ class BlitlineImage
     {
         $meta = $this->getMeta();
 
-        return [
+        $result = [
             'image_identifier' => $this->getImageIdentifier(),
             'src'              => $this->getSrc(),
             'quality'          => $this->getQuality(),
             'meta'             => $meta()
         ];
+
+        if ($srcType = $this->getSrcType()) {
+            $result['src_type'] = $srcType;
+        }
+
+        return $result;
     }
 
     /**
@@ -121,6 +132,29 @@ class BlitlineImage
     public function getSrc()
     {
         return $this->src;
+    }
+
+    /**
+     * Set src type
+     *
+     * @param string $srcType
+     * @return BlitlineImage
+     */
+    public function setSrcType(string $srcType)
+    {
+        $this->srcType = $srcType;
+
+        return $this;
+    }
+
+    /**
+     * Get src type
+     *
+     * @return string
+     */
+    public function getSrcType()
+    {
+        return $this->srcType;
     }
 
     /**

@@ -165,7 +165,7 @@ class BlitlineClient
 
         foreach ($images as $index => $image) {
             if ($func = $funcs->get($index)) {
-                $func->getImage()->setSrc($images[$index]['s3_url']);
+                $func->getImage()->setSrc($image['s3_url']);
             }
         }
 
@@ -185,7 +185,7 @@ class BlitlineClient
 
         if (!$request) {
 
-            if ($jobId = $job->getJobId()) {
+            if (!$jobId = $job->getJobId()) {
                 throw new BlitlineException('EMPTY_JOB_ID', 400);
             }
 
