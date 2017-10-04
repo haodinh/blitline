@@ -30,6 +30,11 @@ class BlitlineImage
     protected $quality = 100;
 
     /**
+     * @var string
+     */
+    protected $extension = 'jpg';
+
+    /**
      *
      * @var MetaImage
      */
@@ -58,6 +63,7 @@ class BlitlineImage
             'image_identifier' => $this->getImageIdentifier(),
             'src'              => $this->getSrc(),
             'quality'          => $this->getQuality(),
+            'extension'        => $this->getExtension(),
             'meta'             => $meta()
         ];
 
@@ -178,6 +184,29 @@ class BlitlineImage
     public function getQuality()
     {
         return $this->quality;
+    }
+
+    /**
+     * Set extension
+     *
+     * @param string $extension
+     * @return BlitlineImage
+     */
+    public function setExtension(string $extension)
+    {
+        $this->extension = $extension;
+
+        return $this;
+    }
+
+    /**
+     * Get extension
+     *
+     * @return string
+     */
+    public function getExtension()
+    {
+        return $this->extension;
     }
 
     /**

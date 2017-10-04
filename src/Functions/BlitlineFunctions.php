@@ -60,7 +60,8 @@ class BlitlineFunctions
         if ($imageIdentifier = $image->getImageIdentifier()) {
             $result['save'] = [
                 'image_identifier' => $imageIdentifier,
-                'quality'          => $image->getQuality()
+                'quality'          => $image->getQuality(),
+                'extension'        => '.' . $image->getExtension()
             ];
         }
 
