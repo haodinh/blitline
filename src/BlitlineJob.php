@@ -133,7 +133,7 @@ class BlitlineJob
      * Set functions
      *
      * @param FunctionsCollection|array $functions
-     * @return FunctionsJob
+     * @return FunctionsCollection
      */
     public function setFunctions($functions)
     {

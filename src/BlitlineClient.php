@@ -5,6 +5,7 @@ namespace Haodinh\Blitline;
 use GuzzleHttp\Client as GuzzleClient;
 use Haodinh\Blitline\BlitlineApp;
 use Haodinh\Blitline\BlitlineJob;
+use Haodinh\Blitline\BlitlinePreProcess;
 use Haodinh\Blitline\BlitlineOptions;
 use Haodinh\Blitline\Http\BlitlineHttp;
 use Haodinh\Blitline\Http\BlitlineRequest;
@@ -25,6 +26,11 @@ class BlitlineClient
      * @var BlitlineJob
      */
     protected $job;
+
+    /**
+     * @var BlitlinePreProcess
+     */
+    protected $preProcess;
 
     /**
      * @var BlitlineOptions
@@ -55,9 +61,10 @@ class BlitlineClient
     {
         $app = $this->getApp();
         $job = $this->getJob();
+        $pre = $this->getPreProcess();
         $opt = $this->getOptions();
 
-        return array_merge($app(), $job(), $opt());
+        return array_merge($app(), $job(), $pre(), $opt());
     }
 
     /**
@@ -106,6 +113,20 @@ class BlitlineClient
         }
 
         return $this->job;
+    }
+
+    /**
+     * Get pre process
+     *
+     * @return BlitlinePreProcess
+     */
+    public function getPreProcess()
+    {
+        if (!$this->preProcess instanceof BlitlinePreProcess) {
+            $this->preProcess = new BlitlinePreProcess;
+        }
+
+        return $this->preProcess;
     }
 
     /**
