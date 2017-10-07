@@ -58,11 +58,20 @@ class BlitlineFunctions
         $image = $this->getImage();
 
         if ($imageIdentifier = $image->getImageIdentifier()) {
-            $result['save'] = [
+
+            $extension = $image->getExtension();
+
+            $save = [
                 'image_identifier' => $imageIdentifier,
                 'quality'          => $image->getQuality(),
-                'extension'        => '.' . $image->getExtension()
+                'extension'        => ".$extension"
             ];
+
+            if ($extension == 'png') {
+                $save['png_quantize'] = true;
+            }
+
+            $result['save'] = $save;
         }
 
         foreach ($this->getChild() as $child) {
