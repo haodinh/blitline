@@ -207,7 +207,7 @@ class BlitlineClient
         if (!$request) {
 
             if (!$jobId = $job->getJobId()) {
-                throw new BlitlineException('EMPTY_JOB_ID', 400);
+                throw new BlitlineException('Empty job id');
             }
 
             $request = new BlitlineRequest([
@@ -221,7 +221,10 @@ class BlitlineClient
         $results = $response->getBody()['results'] ?? null;
 
         if (!$results || !$images = $results['images'] ?? null) {
-            throw new BlitlineException('PROCESS_FAILD', 500);
+
+            $msg = $results['error'] ?? 'Process faild';
+
+            throw new BlitlineException($msg);
         }
 
         $imageList = [];
